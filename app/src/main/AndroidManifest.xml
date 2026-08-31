@@ -304,6 +304,24 @@
         </activity>
 
         <activity
+            android:name=".remoteviews.config.HourlyTrendDoubleWidgetConfigActivity"
+            android:theme="@style/BreezyWeatherTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".remoteviews.config.HourlyTrendQuadWidgetConfigActivity"
+            android:theme="@style/BreezyWeatherTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".remoteviews.config.MultiCityWidgetConfigActivity"
             android:theme="@style/BreezyWeatherTheme"
             android:exported="true">
@@ -509,6 +527,32 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_trend_hourly" />
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.ACTION_APPWIDGET_DISABLED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".background.receiver.widget.WidgetTrendHourlyDoubleProvider"
+            android:label="@string/widget_trend_hourly_double"
+            android:exported="true">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_trend_hourly_double" />
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.ACTION_APPWIDGET_DISABLED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".background.receiver.widget.WidgetTrendHourlyQuadProvider"
+            android:label="@string/widget_trend_hourly_quad"
+            android:exported="true">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_trend_hourly_quad" />
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.ACTION_APPWIDGET_DISABLED" />

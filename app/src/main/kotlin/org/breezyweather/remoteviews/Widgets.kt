@@ -93,6 +93,8 @@ object Widgets {
 
     // trend hourly.
     const val TREND_HOURLY_PENDING_INTENT_CODE_WEATHER = 111
+    const val TREND_HOURLY_DOUBLE_PENDING_INTENT_CODE_WEATHER = 112
+    const val TREND_HOURLY_QUAD_PENDING_INTENT_CODE_WEATHER = 113
 
     // multi city.
     const val MULTI_CITY_PENDING_INTENT_CODE_WEATHER_1 = 121

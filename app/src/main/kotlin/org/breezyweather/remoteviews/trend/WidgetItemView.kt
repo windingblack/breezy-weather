@@ -118,16 +118,18 @@ class WidgetItemView @JvmOverloads constructor(
 
         // trend item view.
         mTrendViewTop = height
-        val trendViewHeight = if (mBottomIconDrawable == null) {
-            context.dpToPx(TREND_VIEW_HEIGHT_DIP_1X.toFloat()).toInt()
-        } else {
-            context.dpToPx(TREND_VIEW_HEIGHT_DIP_2X.toFloat()).toInt()
+        if (trendItemView.visibility != GONE) {
+            val trendViewHeight = if (mBottomIconDrawable == null) {
+                context.dpToPx(TREND_VIEW_HEIGHT_DIP_1X.toFloat()).toInt()
+            } else {
+                context.dpToPx(TREND_VIEW_HEIGHT_DIP_2X.toFloat()).toInt()
+            }
+            trendItemView.measure(
+                MeasureSpec.makeMeasureSpec(mWidth.toInt(), MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(trendViewHeight, MeasureSpec.EXACTLY)
+            )
+            height += trendItemView.measuredHeight.toFloat()
         }
-        trendItemView.measure(
-            MeasureSpec.makeMeasureSpec(mWidth.toInt(), MeasureSpec.EXACTLY),
-            MeasureSpec.makeMeasureSpec(trendViewHeight, MeasureSpec.EXACTLY)
-        )
-        height += trendItemView.measuredHeight.toFloat()
 
         // bottom icon.
         if (mBottomIconDrawable != null) {
@@ -143,12 +145,14 @@ class WidgetItemView @JvmOverloads constructor(
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        trendItemView.layout(
-            0,
-            mTrendViewTop.toInt(),
-            trendItemView.measuredWidth,
-            (mTrendViewTop + trendItemView.measuredHeight).toInt()
-        )
+        if (trendItemView.visibility != GONE) {
+            trendItemView.layout(
+                0,
+                mTrendViewTop.toInt(),
+                trendItemView.measuredWidth,
+                (mTrendViewTop + trendItemView.measuredHeight).toInt()
+            )
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -200,6 +204,11 @@ class WidgetItemView @JvmOverloads constructor(
 
     fun setSize(width: Float) {
         mWidth = width
+    }
+
+    fun setTextSize(size: Float) {
+        mTitleTextPaint.textSize = size
+        mSubtitleTextPaint.textSize = size
     }
 
     fun setTitleText(titleText: String?) {
