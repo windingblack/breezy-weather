@@ -50,6 +50,8 @@ import org.breezyweather.remoteviews.config.ClockDayWeekWidgetConfigActivity
 import org.breezyweather.remoteviews.config.DailyTrendWidgetConfigActivity
 import org.breezyweather.remoteviews.config.DayWeekWidgetConfigActivity
 import org.breezyweather.remoteviews.config.DayWidgetConfigActivity
+import org.breezyweather.remoteviews.config.HourlyTrendDoubleWidgetConfigActivity
+import org.breezyweather.remoteviews.config.HourlyTrendQuadWidgetConfigActivity
 import org.breezyweather.remoteviews.config.HourlyTrendWidgetConfigActivity
 import org.breezyweather.remoteviews.config.MultiCityWidgetConfigActivity
 import org.breezyweather.remoteviews.config.TextWidgetConfigActivity
@@ -61,6 +63,8 @@ import org.breezyweather.remoteviews.presenters.ClockDayWeekWidgetIMP
 import org.breezyweather.remoteviews.presenters.DailyTrendWidgetIMP
 import org.breezyweather.remoteviews.presenters.DayWeekWidgetIMP
 import org.breezyweather.remoteviews.presenters.DayWidgetIMP
+import org.breezyweather.remoteviews.presenters.HourlyTrendDoubleWidgetIMP
+import org.breezyweather.remoteviews.presenters.HourlyTrendQuadWidgetIMP
 import org.breezyweather.remoteviews.presenters.HourlyTrendWidgetIMP
 import org.breezyweather.remoteviews.presenters.MultiCityWidgetIMP
 import org.breezyweather.remoteviews.presenters.TextWidgetIMP
@@ -216,6 +220,12 @@ fun ModulesSettingsScreen(
                 }
                 if (HourlyTrendWidgetIMP.isInUse(context)) {
                     add(Pair(R.string.widget_trend_hourly, HourlyTrendWidgetConfigActivity::class.java))
+                }
+                if (HourlyTrendDoubleWidgetIMP.isInUse(context)) {
+                    add(Pair(R.string.widget_trend_hourly_double, HourlyTrendDoubleWidgetConfigActivity::class.java))
+                }
+                if (HourlyTrendQuadWidgetIMP.isInUse(context)) {
+                    add(Pair(R.string.widget_trend_hourly_quad, HourlyTrendQuadWidgetConfigActivity::class.java))
                 }
                 if (MultiCityWidgetIMP.isInUse(context)) {
                     add(Pair(R.string.widget_multi_city, MultiCityWidgetConfigActivity::class.java))

@@ -88,6 +88,8 @@ import org.breezyweather.remoteviews.presenters.ClockDayWeekWidgetIMP
 import org.breezyweather.remoteviews.presenters.DailyTrendWidgetIMP
 import org.breezyweather.remoteviews.presenters.DayWeekWidgetIMP
 import org.breezyweather.remoteviews.presenters.DayWidgetIMP
+import org.breezyweather.remoteviews.presenters.HourlyTrendDoubleWidgetIMP
+import org.breezyweather.remoteviews.presenters.HourlyTrendQuadWidgetIMP
 import org.breezyweather.remoteviews.presenters.HourlyTrendWidgetIMP
 import org.breezyweather.remoteviews.presenters.MaterialYouCurrentWidgetIMP
 import org.breezyweather.remoteviews.presenters.MaterialYouForecastWidgetIMP
@@ -1103,6 +1105,12 @@ class RefreshHelper @Inject constructor(
         }
         if (HourlyTrendWidgetIMP.isInUse(context)) {
             HourlyTrendWidgetIMP.updateWidgetView(context, locationList[0])
+        }
+        if (HourlyTrendDoubleWidgetIMP.isInUse(context)) {
+            HourlyTrendDoubleWidgetIMP.updateWidgetView(context, locationList[0])
+        }
+        if (HourlyTrendQuadWidgetIMP.isInUse(context)) {
+            HourlyTrendQuadWidgetIMP.updateWidgetView(context, locationList[0])
         }
         if (MaterialYouForecastWidgetIMP.isEnabled(context)) {
             MaterialYouForecastWidgetIMP.updateWidgetView(context, locationList[0])

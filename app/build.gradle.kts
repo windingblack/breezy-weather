@@ -23,9 +23,9 @@ configure<ApplicationExtension> {
     namespace = "org.breezyweather"
 
     defaultConfig {
-        applicationId = "org.breezyweather"
-        versionCode = 60203
-        versionName = "6.2.3"
+        applicationId = "open.weather"
+        versionCode = 1
+        versionName = "1.0.0"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getGitSha()}\"")
@@ -578,5 +578,12 @@ tasks {
 buildscript {
     dependencies {
         classpath(libs.kotlin.gradle)
+    }
+}
+android {
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
     }
 }
