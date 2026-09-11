@@ -31,7 +31,6 @@ import breezyweather.domain.location.model.Location
 import org.breezyweather.R
 import org.breezyweather.background.receiver.widget.WidgetTrendHourlyDoubleProvider
 import org.breezyweather.common.extensions.getHour
-import org.breezyweather.common.extensions.getTabletListAdaptiveWidth
 import org.breezyweather.common.utils.helpers.AsyncHelper
 import org.breezyweather.domain.location.model.isDaylight
 import org.breezyweather.domain.settings.SettingsManager
@@ -67,17 +66,29 @@ object HourlyTrendDoubleWidgetIMP : AbstractRemoteViewsPresenter() {
         if (config.cardStyle == "none") {
             config.cardStyle = "auto"
         }
-        AppWidgetManager.getInstance(context).updateAppWidget(
-            ComponentName(context, WidgetTrendHourlyDoubleProvider::class.java),
-            getRemoteViews(
-                context,
-                location,
-                context.getTabletListAdaptiveWidth(context.resources.displayMetrics.widthPixels),
-                config.cardStyle,
-                config.cardAlpha,
-                config.textSize
-            )
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val widgetIds = appWidgetManager.getAppWidgetIds(
+            ComponentName(context, WidgetTrendHourlyDoubleProvider::class.java)
         )
+        for (widgetId in widgetIds) {
+            val minWidthDip = appWidgetManager.getAppWidgetOptions(widgetId)
+                .getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
+            appWidgetManager.updateAppWidget(
+                widgetId,
+                getRemoteViews(
+                    context,
+                    location,
+                    if (minWidthDip > 0) {
+                        (minWidthDip * context.resources.displayMetrics.density).toInt()
+                    } else {
+                        context.resources.displayMetrics.widthPixels
+                    },
+                    config.cardStyle,
+                    config.cardAlpha,
+                    config.textSize
+                )
+            )
+        }
     }
 
     @WorkerThread
